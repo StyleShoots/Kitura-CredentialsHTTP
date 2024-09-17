@@ -1,5 +1,6 @@
 // swift-tools-version:5.10
 // The swift-tools-version declares the minimum version of Swift required to build this package.
+
 /**
  * Copyright IBM Corporation and the Kitura project authors 2016-2020
  *
@@ -28,19 +29,20 @@ let package = Package(
         )
     ],    
     dependencies: [
-         .package(url: "https://github.com/StyleShoots/Kitura-Credentials.git", branch: "2.5.2_tag"),
+        .package(url: "https://github.com/StyleShoots/Kitura-Credentials.git", branch: "2.5.2_tag"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "CredentialsHTTP",
-            dependencies: ["Credentials"]
+            dependencies: [
+                .product(name: "Credentials", package: "Kitura-Credentials")
+            ]
         ),
         .testTarget(
             name: "CredentialsHTTPTests",
             dependencies: ["CredentialsHTTP"]
         )
     ]
-
 )
